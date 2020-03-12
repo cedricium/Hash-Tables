@@ -131,7 +131,21 @@ class HashTable:
 
         Fill this in.
         """
-        pass
+        self.capacity *= 2
+        doubled_storage = [None] * self.capacity
+        prev_storage = self.storage
+        self.storage = doubled_storage
+
+        for idx, linked_list in enumerate(prev_storage):
+            head_node = linked_list
+            if head_node is not None:
+                # rehash head node
+                self.insert(head_node.key, head_node.value)
+                # …also rehash all other connected nodes if any
+                pointer_node = head_node
+                while pointer_node.next is not None:
+                    pointer_node = pointer_node.next
+                    self.insert(pointer_node.key, pointer_node.value)
 
 
 if __name__ == "__main__":
