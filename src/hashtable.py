@@ -61,10 +61,22 @@ class HashTable:
             self.storage[hash] = LinkedPair(key, value)
         # otherwise, connect new key:value LinkedPair to the end of linked list
         else:
-            current_node = self.storage[hash]
-            while current_node.next is not None:
-                current_node = current_node.next
-            current_node.next = LinkedPair(key, value)
+            head_node = self.storage[hash]
+            # if head node in linked list matches key, overwrite its value
+            if head_node.key == key:
+                head_node.value = value
+            # otherwise, iterate through linked list and look for matching key
+            else:
+                pointer_node = head_node
+                while pointer_node.next != None and pointer_node.key != key:
+                    pointer_node = pointer_node.next
+
+                # if matching keys found, overwrite old/previous value
+                if pointer_node.key == key:
+                    pointer_node.value = value
+                # otherwise, create new LinkedPair and add to linked list
+                elif pointer_node.next == None:
+                    pointer_node.next = LinkedPair(key, value)
 
     def remove(self, key):
         """
