@@ -86,7 +86,19 @@ class HashTable:
 
         Fill this in.
         """
-        pass
+        hash = self._hash_mod(key)
+
+        if self.storage[hash] == None:
+            print('No key found for %s' % key)
+
+        head_node = self.storage[hash]
+        if head_node.key == key:
+            head_node.value = None
+        else:
+            pointer_node = head_node
+            while pointer_node.key != key:
+                pointer_node = pointer_node.next
+            pointer_node.value = None
 
     def retrieve(self, key):
         """
