@@ -136,7 +136,7 @@ class HashTable:
         prev_storage = self.storage
         self.storage = doubled_storage
 
-        for idx, linked_list in enumerate(prev_storage):
+        for linked_list in prev_storage:
             head_node = linked_list
             if head_node is not None:
                 # rehash head node
