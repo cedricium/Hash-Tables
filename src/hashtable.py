@@ -25,15 +25,20 @@ class HashTable:
 
         You may replace the Python hash with DJB2 as a stretch goal.
         """
-        return hash(key)
+        # return hash(key)
+        return self._hash_djb2(key)
 
     def _hash_djb2(self, key):
         """
         Hash an arbitrary key using DJB2 hash
 
-        OPTIONAL STRETCH: Research and implement DJB2
+        References:
+            - https://en.wikipedia.org/wiki/Universal_hashing#Hashing_strings
         """
-        pass
+        h = 5381
+        for char in key:
+            h = (h * 33) + ord(char)
+        return h
 
     def _hash_mod(self, key):
         """
